@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Automated Test Suite for POX Controller & Health Monitoring System
+Automated Test Suite for POX Controller & Socket Programming Application
 Deliverable 2 - Role 2: SDN & Control Plane Engineer
 
 This script tests:
-1. Telemetry Payload Parsing & Priority Detection
+1. Socket Datagram Payload Parsing & Priority Detection
 2. Port Status Link Failure Detection & Topology State Tracking
 3. Dynamic Path Calculation & Detour Failover
 4. Safe Payload Extraction Across String/Bytes Formats
@@ -250,6 +250,6 @@ class TestSDNControllerRole2(unittest.TestCase):
 
 if __name__ == '__main__':
     print("\n" + "="*70)
-    print(" EXECUTING POX SDN CONTROLLER TEST SUITE (Deliverable 2 - Role 2)")
+    print(" EXECUTING POX SDN SOCKET CONTROLLER TEST SUITE (Deliverable 2)")
     print("="*70)
     unittest.main(verbosity=2)

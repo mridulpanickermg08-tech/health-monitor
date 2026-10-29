@@ -1,11 +1,11 @@
 """
-POX OpenFlow SDN Controller for Mininet Health Monitor Network
+POX OpenFlow SDN Controller for Mininet Socket Programming Network
 Deliverable 2 - Role 2: SDN & Control Plane Engineer
 
 Key Capabilities:
 1. Flow Prioritization:
-   - Deep inspection of telemetry UDP packets (port 5005) from health monitoring agents.
-   - Detects "priority": "HIGH" in JSON telemetry payload (triggered when host CPU > 80%).
+   - Deep inspection of socket UDP datagrams (port 5005) from client socket applications.
+   - Detects "priority": "HIGH" in JSON socket payload.
    - Installs high-priority OpenFlow flow rules (priority=65535) on OpenFlow switches.
    - Normal traffic and bulk traffic receives standard priority rules (priority=100).
 
@@ -16,10 +16,10 @@ Key Capabilities:
      preventing packet blackholing.
 
 3. Automated Path Rerouting:
-   - Automatically reroutes telemetry traffic from the primary path to alternate/backup routes.
+   - Automatically reroutes socket application traffic from primary path to alternate/backup routes.
    - Primary Path: s1 -> s2 -> h1 (Direct switch-to-switch link)
    - Alternate Path: s1 -> s3 -> s2 -> h1 (Detour via redundant backup switch s3)
-   - Seamless failover keeps telemetry packets flowing without breaking UDP sockets.
+   - Seamless failover keeps socket datagrams flowing without breaking UDP sockets.
    - Detects link restoration (ofp_port_status UP) and re-enables the optimal primary route.
 """
 
@@ -118,7 +118,7 @@ class ResilientSDNController(object):
         }
 
         log.info("==========================================================")
-        log.info("  SDN HEALTH MONITOR CONTROLLER INITIALIZED (Deliverable 2)")
+        log.info("  SDN SOCKET PROGRAMMING CONTROLLER INITIALIZED (Deliverable 2)")
         log.info("  Role 2: Flow Prioritization + Fault Tolerance + Rerouting")
         log.info("==========================================================")
 
@@ -392,7 +392,7 @@ class ResilientSDNController(object):
         if is_high_priority:
             log.info("")
             log.info("🔥 ================================================================")
-            log.info("🔥 [SDN QoS ALERT] HIGH-PRIORITY TELEMETRY DETECTED!")
+            log.info("🔥 [SDN QoS ALERT] HIGH-PRIORITY SOCKET PACKET DETECTED!")
             log.info("🔥 Switch: s%s (DPID: %s) | In-Port: %s -> Out-Port: %s", dpid, dpid, in_port, out_port)
             log.info("🔥 Source: %s -> Dest: %s | UDP Port: %s", src_ip, dst_ip, udp_pkt.dstport)
             log.info("🔥 Action: Installing MAX-PRIORITY Flow Rule (Priority: %d)", PRIORITY_FLOW_LEVEL)

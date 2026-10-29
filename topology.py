@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
 """
-Mininet Network Topology for SDN Health Monitor Network
+Mininet Network Topology for SDN Socket Programming Network
 Deliverable 2 - Role 2: SDN & Control Plane Engineer
 
 Architecture:
   - Supports Resilient Multi-Switch Triangle Topology (default):
-      s1: Aggregates Agent 1 (h2) and Agent 2 (h3)
-      s2: Connects Central Server (h1)
+      s1: Aggregates Socket Client 1 (h2) and Socket Client 2 (h3)
+      s2: Connects Central Socket Server (h1)
       s3: Redundant backup switch providing alternate path
 
       Primary Path:   s1 (Port 2) <======================> s2 (Port 1)
       Alternate Path: s1 (Port 3) <===> s3 <===> s2 (Port 2)
 
   - Port Mapping:
-      s1: Port 1 -> h2 (Agent 1)
+      s1: Port 1 -> h2 (Socket Client 1)
           Port 2 -> s2 (Primary trunk)
           Port 3 -> s3 (Backup detour)
-          Port 4 -> h3 (Agent 2)
+          Port 4 -> h3 (Socket Client 2)
       s2: Port 1 -> s1 (Primary trunk)
           Port 2 -> s3 (Backup detour)
-          Port 3 -> h1 (Server)
+          Port 3 -> h1 (Socket Server)
       s3: Port 1 -> s1 (Backup link)
           Port 2 -> s2 (Backup link)
-          Port 3 -> h2 (Dual-homed backup link for Agent 1)
+          Port 3 -> h2 (Dual-homed backup link for Client 1)
 
   - Also supports single-switch mode via --single argument.
 """
@@ -82,13 +82,13 @@ def create_resilient_topology(controller_ip='127.0.0.1', controller_port=6653):
     net.start()
 
     print("\n" + "="*70)
-    print("   SDN HEALTH MONITOR NETWORK - RESILIENT TOPOLOGY ACTIVE")
+    print("   SDN SOCKET PROGRAMMING NETWORK - RESILIENT TOPOLOGY ACTIVE")
     print("="*70)
     print(f"  Controller: POX listening on {controller_ip}:{controller_port}")
     print("  Topology Design:")
-    print("    h2 (Agent 1: 10.0.0.2) --- [s1] ===== Primary Trunk ===== [s2] --- h1 (Server: 10.0.0.1)")
-    print("    h3 (Agent 2: 10.0.0.3) ---   |                              |")
-    print("                                 \\===== Backup Detour (s3) =====/")
+    print("    h2 (Client 1: 10.0.0.2) --- [s1] ===== Primary Trunk ===== [s2] --- h1 (Server: 10.0.0.1)")
+    print("    h3 (Client 2: 10.0.0.3) ---   |                              |")
+    print("                                  \\===== Backup Detour (s3) =====/")
     print("="*70 + "\n")
 
     info('*** Running Mininet CLI\n')

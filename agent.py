@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Telemetry Health Agent with Process Monitoring & Heartbeat
-Deliverable 2 - Application Layer (Role 1 & Integration)
+Low-Level UDP Socket Client Node (Periodic Heartbeat & Process Metrics)
+SDN-Socket Programming Mini Project - Deliverable 2
 
 Features:
-- Periodic 1-second heartbeat telemetry stream over UDP (port 5005).
-- Collects system metrics (overall CPU, memory, timestamp).
-- Collects process-level statistics (top 3 CPU-consuming processes) using psutil.
-- Dynamically assigns "priority": "HIGH" in JSON payload when CPU exceeds 80%
-  (or when --simulate-high-cpu is passed for SDN testing).
+- Periodic 1-second heartbeat stream over raw UDP sockets (port 5005).
+- Collects system metrics (overall CPU, memory, timestamp) and process statistics.
+- Dynamically assigns "priority": "HIGH" in JSON socket payload when CPU exceeds 80%
+  (or when --simulate-high-cpu is passed for SDN flow prioritization testing).
 """
 
 import socket

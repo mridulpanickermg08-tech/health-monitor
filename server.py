@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Central Monitoring Server with Missing-Heartbeat Detector & Priority Alerts
-Deliverable 2 - Application Layer (Role 1 & Integration)
+Central UDP Socket Server with Missing-Heartbeat Detector & Priority Alerts
+SDN-Socket Programming Mini Project - Deliverable 2
 
 Features:
-- Listens for UDP telemetry datagrams on port 5005.
+- Listens for raw UDP socket datagrams on port 5005.
 - Decodes JSON payload containing metrics, priority tags, and process lists.
 - Background heartbeat watcher detecting lost/crashed nodes (missing heartbeat > 3s).
-- Logs high-priority telemetry alerts with visual indicators.
+- Logs high-priority socket alerts with visual indicators.
 """
 
 import socket
@@ -48,7 +48,7 @@ def start_server():
     sock.bind((LISTEN_IP, LISTEN_PORT))
 
     print("="*70)
-    print(f"  SDN MONITORING SERVER ACTIVE ON UDP {LISTEN_IP}:{LISTEN_PORT}")
+    print(f"  SDN SOCKET SERVER ACTIVE ON UDP {LISTEN_IP}:{LISTEN_PORT}")
     print(f"  Heartbeat Failure Threshold: {HEARTBEAT_TIMEOUT} seconds")
     print("="*70)
 
