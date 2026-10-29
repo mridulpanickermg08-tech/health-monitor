@@ -35,7 +35,7 @@ from mininet.link import TCLink
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 
-def create_resilient_topology(controller_ip='127.0.0.1', controller_port=6633):
+def create_resilient_topology(controller_ip='127.0.0.1', controller_port=6653):
     """
     Creates a resilient 3-switch topology with redundant paths for dynamic rerouting.
     """
@@ -84,27 +84,11 @@ def create_resilient_topology(controller_ip='127.0.0.1', controller_port=6633):
     print("\n" + "="*70)
     print("   SDN HEALTH MONITOR NETWORK - RESILIENT TOPOLOGY ACTIVE")
     print("="*70)
-    print("  Controller: POX listening on {}:{}".format(controller_ip, controller_port))
+    print(f"  Controller: POX listening on {controller_ip}:{controller_port}")
     print("  Topology Design:")
     print("    h2 (Agent 1: 10.0.0.2) --- [s1] ===== Primary Trunk ===== [s2] --- h1 (Server: 10.0.0.1)")
     print("    h3 (Agent 2: 10.0.0.3) ---   |                              |")
     print("                                 \\===== Backup Detour (s3) =====/")
-    print("")
-    print("  Test Scenarios for Deliverable 2 (Role 2):")
-    print("  1. Start Server & Agents:")
-    print("     mininet> h1 python3 server.py &")
-    print("     mininet> h2 python3 agent.py &")
-    print("")
-    print("  2. Test Link Failure Detection & Automated Rerouting:")
-    print("     mininet> link s1 s2 down    # Primary link drops; POX reroutes via s3!")
-    print("     mininet> link s1 s2 up      # Primary link recovers; POX restores primary route!")
-    print("")
-    print("  3. Test Host Link Drop:")
-    print("     mininet> link s1 h2 down    # POX detects port status down for h2!")
-    print("     mininet> link s1 h2 up      # Restored!")
-    print("")
-    print("  4. Inspect High-Priority OpenFlow Rules (priority 65535):")
-    print("     mininet> dpctl dump-flows -O OpenFlow10")
     print("="*70 + "\n")
 
     info('*** Running Mininet CLI\n')
@@ -113,7 +97,7 @@ def create_resilient_topology(controller_ip='127.0.0.1', controller_port=6633):
     info('*** Stopping Network\n')
     net.stop()
 
-def create_single_topology(controller_ip='127.0.0.1', controller_port=6633):
+def create_single_topology(controller_ip='127.0.0.1', controller_port=6653):
     """
     Creates single-switch topology (compatible with Deliverable 1).
     """
@@ -148,7 +132,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="SDN Health Monitor Topology")
     parser.add_argument('--single', action='store_true', help="Run in single switch mode")
     parser.add_argument('--ip', type=str, default='127.0.0.1', help="Controller IP (default: 127.0.0.1)")
-    parser.add_argument('--port', type=int, default=6633, help="Controller Port (default: 6633)")
+    parser.add_argument('--port', type=int, default=6653, help="Controller Port (default: 6653)")
     args = parser.parse_args()
 
     setLogLevel('info')
